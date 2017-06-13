@@ -1,0 +1,33 @@
+/* The navigation bar */
+.logo {
+    text-decoration: none;
+}
+
+/* Links inside the navbar */
+
+main {
+    margin-top: 200px; /* Add a top margin to avoid content overlay */
+}
+
+.icon-bar {
+    background-color: #939393;
+}
+
+.navbar {
+    background-color: #939393;
+    height:70px;
+}
+
+.navbar-toggle {
+    color: #939393;
+    background-color: white;
+}
+
+.has-submenu {
+    position: relative;
+    display: inline-block;
+}
+
+.has-submenu:hover .dropdown-menu {
+    display:block;
+}

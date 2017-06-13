@@ -1,0 +1,31 @@
+{% load navigation_tags static wagtailuserbar %}
+
+{% block head %}
+    {% include "includes/head.html" %}
+{% endblock head %}
+
+    <body class="{% block body_class %}{% endblock %}">
+        {% wagtailuserbar %}
+
+        {% block header %}
+            {# Header contains the main_navigation block #}
+            {% include "includes/header.html" with parent=site_root calling_page=self %}
+        {% endblock header %}
+
+        <main>
+        {% block content %}{% endblock %}
+        <main>
+
+        {# Global javascript #}
+        <script type="text/javascript" src="{% static 'js/mhr.js' %}"></script>
+
+        {% block extra_js %}
+            {# Override this in templates to add extra javascript #}
+        {% endblock %}
+
+        <footer>
+            {% include "includes/footer.html" %}
+        </footer>
+
+    </body>
+</html>
