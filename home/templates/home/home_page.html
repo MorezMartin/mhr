@@ -4,17 +4,19 @@
 {% block content %}
 <div class="homepage">
 
-{% image page.image fill-1920x600 as image %}
-<div class="container-fluid hero" style="background-image:url('{{ image.url }}')">
-    <div class="hero-gradient-mask"></div>
-    <div class="container">
+{% image page.image max-3440x1440 as image %}
+<div class="container-fluid hero">
+	<img src="{{ image.url }}" />
+<!--<img src="{{ image.url }}" alt="{{ image.alt }}" class="my-custom-class" />-->
+	<div class="hero-gradient-mask"></div>
+    <div class="container hero-text">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2 home-hero">
+            <div class="home-hero">
                 <h1>{{ page.title }}</h1>
-                <p class="lead">{{ page.hero_text }}</p>
-		<a href="{% if page.hero_cta_link %}{% pageurl page.hero_cta_link %}{% endif %}" class="hero-cta-link hvr-icon-forward">
+                <div class="lead">{{ page.hero_text }}</div>
+		<div class="hero-cta"><a class="hero-cta-link" href="{% if page.hero_cta_link %}{% pageurl page.hero_cta_link %}{% endif %}">
                     {{ page.hero_cta }}
-                </a>
+                </a></div>
             </div>
         </div>
     </div>
@@ -59,6 +61,7 @@
 </div>
 
 {% if page.body %}
+<div class="main-content">
 <div class="container-fluid streamfield">
     <div class="container">
         <div class="row">
