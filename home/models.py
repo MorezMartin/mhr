@@ -86,10 +86,12 @@ class FooterText(models.Model):
     accessible on the template via a template tag defined in base/templatetags/
     navigation_tags.py
     """
-    body = RichTextField()
+    body = StreamField(
+        BaseStreamBlock(), verbose_name="Footer body", blank=True
+    )
 
     panels = [
-        FieldPanel('body'),
+        StreamFieldPanel('body'),
     ]
 
     def __str__(self):
@@ -171,27 +173,6 @@ class HomePage(Page):
         BaseStreamBlock(), verbose_name="Home content block", blank=True
     )
 
-    # Promo section of the HomePage
-    promo_image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-        help_text='Promo image'
-    )
-    promo_title = models.CharField(
-        null=True,
-        blank=True,
-        max_length=255,
-        help_text='Title to display above the promo copy'
-    )
-    promo_text = RichTextField(
-        null=True,
-        blank=True,
-        help_text='Write some promotional copy'
-    )
-
     # Featured sections on the HomePage
     # You will see on templates/base/home_page.html that these are treated
     # in different ways, and displayed in different areas of the page.
@@ -257,11 +238,6 @@ class HomePage(Page):
                 PageChooserPanel('hero_cta_link'),
                 ])
             ], heading="Hero section"),
-        MultiFieldPanel([
-            ImageChooserPanel('promo_image'),
-            FieldPanel('promo_title'),
-            FieldPanel('promo_text'),
-        ], heading="Promo section"),
         StreamFieldPanel('body'),
         MultiFieldPanel([
             MultiFieldPanel([

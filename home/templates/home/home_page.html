@@ -23,18 +23,6 @@
 </div>
 
 <div class="container">
-    <div class="row promo-row">
-        <div class="col-sm-5 promo">
-            {% if page.promo_image or page.promo_title or page.promo_text %}
-                <figure>{% image page.promo_image fill-200x200-c100 %}</figure>
-                <div class="promo-text">
-                    <h3>{{ page.promo_title }}</h3>
-                    {{ page.promo_text|safe }}
-                </div>
-            {% endif %}
-        </div>
-
-        <div class="col-sm-6 col-sm-offset-1 feature-1">
             {% if page.featured_section_1 %}
             <h2>{{ page.featured_section_1_title }}</h2>
                 <div class="featured-children">
@@ -56,8 +44,6 @@
                     {% endfor %}
                 </div>
             {% endif %}
-        </div>
-    </div>
 </div>
 
 {% if page.body %}

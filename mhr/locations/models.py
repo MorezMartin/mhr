@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from datetime import datetime
 
 from django.conf import settings
@@ -7,7 +8,13 @@ from django.db import models
 from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
+
+from wagtail.wagtailadmin.edit_handlers import (
+    FieldPanel,
+    InlinePanel,
+    StreamFieldPanel,
+    MultiFieldPanel,
+)
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailsearch import index
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
@@ -154,6 +161,23 @@ class LocationPage(Page):
             ),
         ]
     )
+    sit = models.PositiveSmallIntegerField(
+        help_text='Person number in sitted mode',
+        default="0",
+        verbose_name="Number Sit",
+    )
+    theater = models.PositiveSmallIntegerField(
+        help_text='Person number in theater mode',
+        default="0",
+        verbose_name="Number theater",
+    )
+    cocktail = models.PositiveSmallIntegerField(
+        help_text='Person number in cocktail mode',
+        default="0",
+        verbose_name="Number cocktail",
+    ) 
+
+
 
     # Search index configuration
     search_fields = Page.search_fields + [
@@ -165,6 +189,11 @@ class LocationPage(Page):
     content_panels = [
         FieldPanel('title', classname="full"),
         FieldPanel('introduction', classname="full"),
+        MultiFieldPanel([
+            FieldPanel('sit'),
+            FieldPanel('theater'),
+            FieldPanel('cocktail'),
+            ],),
         ImageChooserPanel('image'),
         StreamFieldPanel('body'),
         FieldPanel('address', classname="full"),
